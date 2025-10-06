@@ -3,421 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../../sidebar.css">
+    <link rel="stylesheet" href="../../sidebar.css">
     <%- include('partials/adminpanelhead', {bot, user, path}) %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="https://kit.fontawesome.com/b9930c15d0.js" crossorigin="anonymous"></script>
     <title>Admin Premium</title>
 </head>
 
 <style>
-        .home{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-</style>
-
-<body>
-    <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="https://cdn.discordapp.com/avatars/<%= member.id %>/<%= member.avatar %>" alt="">
-                </span>
-    
-                <div class="text logo-text">
-                    <span class="name"><%= member.username %></span>
-                    <span class="profession"><%= auth %></span>
-                </div>
-            </div>
-    
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-        
-    
-        <div class="menu-bar">
-            <div class="menu">
-    
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Ara...">
-                </li>
-    
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="./embed">
-                            <i class="fa-solid fa-wand-magic-sparkles icon"></i>
-                            <span class="text nav-text">Mesaj Oluştur</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./talepler">
-                            <i class="fa-solid fa-ticket icon"></i>
-                            <span class="text nav-text">Talepler</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./forum">
-                            <i class="fa-regular fa-comment icon"></i>
-                            <span class="text nav-text">Forum</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./premium">
-                            <i class="fa-solid fa-crown icon"></i>
-                            <span class="text nav-text">Premium</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./karaliste">
-                            <i class="fa-solid fa-user-slash icon"></i>
-                            <span class="text nav-text">Karaliste</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./ayarlar">
-                            <i class="fa-solid fa-sliders icon"></i>
-                            <span class="text nav-text">Ayarlar</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./kullanicilar">
-                            <i class="fa-solid fa-user icon"></i>
-                            <span class="text nav-text">Kullanıcılar</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./dilekle">
-                            <i class="fa-solid fa-language icon"></i>
-                            <span class="text nav-text">Dil Ekle</span>
-                        </a>
-                    </li>
-    
-                    <li class="nav-link">
-                        <a href="./updates">
-                            <i class="fa-solid fa-wrench icon"></i>
-                            <span class="text nav-text">Güncelleme</span>
-                        </a>
-    
-                    </li>
-    
-                </ul>
-            </div>
-    
-            <div class="bottom-content">
-                            <li class="">
-                    <a href="/">
-                        <i class='bx bx-home-alt icon'></i>
-                        <span class="text nav-text">Ana sayfa</span>
-                    </a>
-                </li>
-                
-                <li class="">
-                    <a href="/logout">
-                        <i class='bx bx-log-out icon' ></i>
-                        <span class="text nav-text">Çıkış yap</span>
-                    </a>
-                </li>
-    
-                <li class="mode">
-                    <div class="sun-moon">
-                        <i class='bx bx-moon icon moon'></i>
-                        <i class='bx bx-sun icon sun'></i>
-                    </div>
-                    <span class="mode-text text">Koyu mod</span>
-    
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li>
-                
-            </div>
-            
-            
-        </div>
-        
-        
-    
-    </nav>
-    
-    <section class="home">
-    <div class="container">
-        <div class="card">
-            <div class="header-section">
-                <h1>Premium Yönetimi</h1>
-                <button class="generate-code-btn" onclick="openGenerateModal()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 5v14M5 12h14"/>
-                    </svg>
-                    Premium Kod Oluştur
-                </button>
-            </div>
-
-            <div class="search-section">
-                <div class="search-box">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" id="searchInput" placeholder="Kullanıcı ID veya isim ile ara...">
-                </div>
-                <div class="filter-box">
-                    <select id="planFilter">
-                        <option value="">Tüm Planlar</option>
-                        <option value="basic">Basic</option>
-                        <option value="premium">Premium</option>
-                        <option value="professional">Professional</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="premium-users" id="premiumUsers">
-                <!-- Premium users will be listed here -->
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Generate Code Modal -->
-    <div id="generateModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Premium Kod Oluştur</h2>
-                <button class="close-btn" onclick="closeGenerateModal()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Premium Türü</label>
-                    <select id="premiumType">
-                        <option value="basic">Basic</option>
-                        <option value="premium">Premium</option>
-                        <option value="professional">Professional</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Süre (Gün)</label>
-                    <input type="number" id="duration" min="1" value="30">
-                </div>
-                <div class="form-group">
-                    <label>Kullanım Limiti</label>
-                    <input type="number" id="usageLimit" min="1" value="1">
-                </div>
-                <div class="form-group">
-                    <label>Not (Opsiyonel)</label>
-                    <textarea id="codeNote" rows="2" placeholder="Kod hakkında not ekleyin"></textarea>
-                </div>
-                <div id="generatedCode" class="generated-code-container" style="display: none;">
-                    <label>Oluşturulan Kod:</label>
-                    <div class="code-display">
-                        <span id="codeValue"></span>
-                        <button onclick="copyCode()" class="copy-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <button onclick="generateCode()" class="generate-btn">Kod Oluştur</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Sample data - In a real application, this would come from a database
-const premiumUsers = [
-    {
-        id: "user_123456",
-        plan: "professional",
-        startDate: "2025-03-01",
-        endDate: "2026-03-01",
-        status: "active"
-    },
-    {
-        id: "user_789012",
-        plan: "premium",
-        startDate: "2025-02-15",
-        endDate: "2025-08-15",
-        status: "active"
-    },
-    {
-        id: "user_345678",
-        plan: "basic",
-        startDate: "2025-01-01",
-        endDate: "2025-04-01",
-        status: "active"
-    }
-];
-
-// DOM Elements
-const premiumUsersList = document.getElementById('premiumUsers');
-const searchInput = document.getElementById('searchInput');
-const planFilter = document.getElementById('planFilter');
-const generateModal = document.getElementById('generateModal');
-
-// Render premium users
-function renderPremiumUsers(users) {
-    premiumUsersList.innerHTML = users.map(user => `
-        <div class="user-item">
-            <div class="user-info">
-                <div class="user-header">
-                    <span class="user-id">${user.id}</span>
-                    <span class="premium-badge ${user.plan.toLowerCase()}">${user.plan}</span>
-                </div>
-                <div class="user-meta">
-                    <span class="meta-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        Başlangıç: ${new Date(user.startDate).toLocaleDateString('tr-TR')}
-                    </span>
-                    <span class="meta-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        Bitiş: ${new Date(user.endDate).toLocaleDateString('tr-TR')}
-                    </span>
-                    <span class="meta-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                        </svg>
-                        ${user.status === 'active' ? 'Aktif' : 'Pasif'}
-                    </span>
-                </div>
-            </div>
-            <div class="user-actions">
-                <button class="action-btn edit-btn" onclick="editPremium('${user.id}')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                </button>
-                <button class="action-btn delete-btn" onclick="revokePremium('${user.id}')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    `).join('');
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-// Search functionality
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredUsers = premiumUsers.filter(user => 
-        user.id.toLowerCase().includes(searchTerm)
-    );
-    renderPremiumUsers(filteredUsers);
-});
-
-// Plan filter functionality
-planFilter.addEventListener('change', (e) => {
-    const plan = e.target.value;
-    const filteredUsers = plan 
-        ? premiumUsers.filter(user => user.plan.toLowerCase() === plan)
-        : premiumUsers;
-    renderPremiumUsers(filteredUsers);
-});
-
-// Modal functions
-function openGenerateModal() {
-    generateModal.style.display = 'block';
-    document.getElementById('generatedCode').style.display = 'none';
-}
-
-function closeGenerateModal() {
-    generateModal.style.display = 'none';
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    if (event.target === generateModal) {
-        closeGenerateModal();
-    }
-}
-
-// Generate premium code
-function generateCode() {
-    const type = document.getElementById('premiumType').value;
-    const duration = document.getElementById('duration').value;
-    const usageLimit = document.getElementById('usageLimit').value;
-    
-    // Generate a random code (in real application, this would be more sophisticated)
-    const code = `PREM-${type.substring(0, 3).toUpperCase()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-    
-    document.getElementById('generatedCode').style.display = 'block';
-    document.getElementById('codeValue').textContent = code;
-}
-
-// Copy generated code
-function copyCode() {
-    const code = document.getElementById('codeValue').textContent;
-    navigator.clipboard.writeText(code);
-    
-    const copyBtn = document.querySelector('.copy-btn');
-    copyBtn.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-    `;
-    setTimeout(() => {
-        copyBtn.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-        `;
-    }, 2000);
-}
-
-// Premium management functions
-function editPremium(userId) {
-    console.log(`Editing premium for user ${userId}`);
-    // Implement premium editing logic
-}
-
-function revokePremium(userId) {
-    if (confirm('Bu kullanıcının premium üyeliğini iptal etmek istediğinizden emin misiniz?')) {
-        console.log(`Revoking premium for user ${userId}`);
-        const updatedUsers = premiumUsers.filter(user => user.id !== userId);
-        renderPremiumUsers(updatedUsers);
-    }
-}
-
-// Initial render
-renderPremiumUsers(premiumUsers);
-    </script>
-</body>
-</html>
-
-
-<style>
-    :root {
+:root {
     --premium-primary-color: #3b82f6;
     --premium-primary-hover: #2563eb;
     --premium-success-color: #10b981;
@@ -432,7 +35,6 @@ renderPremiumUsers(premiumUsers);
     --premium-radius: 0.5rem;
     --premium-modal-overlay: rgba(0, 0, 0, 0.5);
 }
-
 
 .container {
     max-width: 1200px;
@@ -457,7 +59,7 @@ renderPremiumUsers(premiumUsers);
 h1 {
     font-size: 1.875rem;
     font-weight: bold;
-    color: var(--premium-ext-color);
+    color: var(--premium-text-color);
     margin: 0;
 }
 
@@ -515,7 +117,7 @@ h1 {
 
 .filter-box select {
     padding: 0.75rem 2rem 0.75rem 1rem;
-    border: 1px solid var(--premium-order-color);
+    border: 1px solid var(--premium-border-color);
     border-radius: var(--premium-radius);
     font-size: 1rem;
     background-color: white;
@@ -552,6 +154,13 @@ h1 {
     align-items: center;
     gap: 1rem;
     margin-bottom: 0.5rem;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
 }
 
 .user-id {
@@ -636,7 +245,7 @@ h1 {
 
 .delete-btn {
     background-color: #fee2e2;
-    color: var(--danger-color);
+    color: var(--premium-danger-color);
 }
 
 .delete-btn:hover {
@@ -644,7 +253,6 @@ h1 {
     color: white;
 }
 
-/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -780,37 +388,553 @@ h1 {
     filter: brightness(110%);
 }
 
-ul{
+.edit-modal .user-info-card {
+    background-color: var(--premium-bg-color);
+    padding: 1rem;
+    border-radius: var(--premium-radius);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
-padding: 0px;
+.edit-modal .user-info-card img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+ul{
+    padding: 0px;
 }
 </style>
 
-<script>
-    const body = document.querySelector('body'),
-  sidebar = body.querySelector('nav'),
-  toggle = body.querySelector(".toggle"),
-  searchBtn = body.querySelector(".search-box"),
-  modeSwitch = body.querySelector(".toggle-switch"),
-  modeText = body.querySelector(".mode-text");
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="https://cdn.discordapp.com/avatars/<%= member.id %>/<%= member.avatar %>" alt="">
+                </span>
 
+                <div class="text logo-text">
+                    <span class="name"><%= member.username %></span>
+                    <span class="profession"><%= auth %></span>
+                </div>
+            </div>
 
-toggle.addEventListener("click" , () =>{
-sidebar.classList.toggle("close");
-})
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
 
-searchBtn.addEventListener("click" , () =>{
-sidebar.classList.remove("close");
-})
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Ara...">
+                </li>
 
-modeSwitch.addEventListener("click" , () =>{
-body.classList.toggle("dark");
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="./embed">
+                            <i class="fa-solid fa-wand-magic-sparkles icon"></i>
+                            <span class="text nav-text">Mesaj Oluştur</span>
+                        </a>
+                    </li>
 
-if(body.classList.contains("dark")){
-    modeText.innerText = "Aydınlık";
-}else{
-    modeText.innerText = "Karanlık";
-    
-}
-});
-</script>
+                    <li class="nav-link">
+                        <a href="./talepler">
+                            <i class="fa-solid fa-ticket icon"></i>
+                            <span class="text nav-text">Talepler</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./forum">
+                            <i class="fa-regular fa-comment icon"></i>
+                            <span class="text nav-text">Forum</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./premium">
+                            <i class="fa-solid fa-crown icon"></i>
+                            <span class="text nav-text">Premium</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./karaliste">
+                            <i class="fa-solid fa-user-slash icon"></i>
+                            <span class="text nav-text">Karaliste</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./ayarlar">
+                            <i class="fa-solid fa-sliders icon"></i>
+                            <span class="text nav-text">Ayarlar</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./kullanicilar">
+                            <i class="fa-solid fa-user icon"></i>
+                            <span class="text nav-text">Kullanıcılar</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./dilekle">
+                            <i class="fa-solid fa-language icon"></i>
+                            <span class="text nav-text">Dil Ekle</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./updates">
+                            <i class="fa-solid fa-wrench icon"></i>
+                            <span class="text nav-text">Güncelleme</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="/">
+                        <i class='bx bx-home-alt icon'></i>
+                        <span class="text nav-text">Ana sayfa</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="/logout">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Çıkış yap</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Koyu mod</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home">
+        <div class="container">
+            <div class="card">
+                <div class="header-section">
+                    <h1>Premium Yönetimi</h1>
+                    <button class="generate-code-btn" onclick="openGenerateModal()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        Premium Kod Oluştur
+                    </button>
+                </div>
+
+                <div class="search-section">
+                    <div class="search-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Kullanıcı ID veya isim ile ara...">
+                    </div>
+                    <div class="filter-box">
+                        <select id="planFilter">
+                            <option value="">Tüm Planlar</option>
+                            <option value="basic">Basic</option>
+                            <option value="premium">Premium</option>
+                            <option value="professional">Professional</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="premium-users" id="premiumUsers">
+                </div>
+            </div>
+        </div>
+
+        <div id="generateModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Premium Kod Oluştur</h2>
+                    <button class="close-btn" onclick="closeGenerateModal()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Premium Türü</label>
+                        <select id="premiumType">
+                            <option value="basic">Basic</option>
+                            <option value="premium">Premium</option>
+                            <option value="professional">Professional</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Süre (Gün)</label>
+                        <input type="number" id="duration" min="1" value="30">
+                    </div>
+                    <div class="form-group">
+                        <label>Kullanım Limiti</label>
+                        <input type="number" id="usageLimit" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Not (Opsiyonel)</label>
+                        <textarea id="codeNote" rows="2" placeholder="Kod hakkında not ekleyin"></textarea>
+                    </div>
+                    <div id="generatedCode" class="generated-code-container" style="display: none;">
+                        <label>Oluşturulan Kod:</label>
+                        <div class="code-display">
+                            <span id="codeValue"></span>
+                            <button onclick="copyCode()" class="copy-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button onclick="generateCode()" class="generate-btn">Kod Oluştur</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Premium Üyelik Düzenle</h2>
+                    <button class="close-btn" onclick="closeEditModal()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="user-info-card" id="editUserInfo"></div>
+
+                    <div class="form-group">
+                        <label>Kullanıcı ID</label>
+                        <input type="text" id="editUserId" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Premium Planı</label>
+                        <select id="editPlan">
+                            <option value="basic">🥉 Basic</option>
+                            <option value="premium">🥈 Premium</option>
+                            <option value="professional">🥇 Professional</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bitiş Tarihi</label>
+                        <input type="date" id="editEndDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Durum</label>
+                        <select id="editStatus">
+                            <option value="active">🟢 Aktif</option>
+                            <option value="expired">🔴 Pasif</option>
+                        </select>
+                    </div>
+
+                    <button onclick="saveEditPremium()" class="generate-btn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let allPremiums = [];
+
+        const body = document.querySelector('body');
+        const sidebar = body.querySelector('nav');
+        const toggle = body.querySelector(".toggle");
+        const searchBtn = body.querySelector(".search-box");
+        const modeSwitch = body.querySelector(".toggle-switch");
+        const modeText = body.querySelector(".mode-text");
+
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+
+        searchBtn.addEventListener("click", () => {
+            sidebar.classList.remove("close");
+        });
+
+        modeSwitch.addEventListener("click", () => {
+            body.classList.toggle("dark");
+            if (body.classList.contains("dark")) {
+                modeText.innerText = "Aydınlık";
+            } else {
+                modeText.innerText = "Karanlık";
+            }
+        });
+
+        async function loadPremiums() {
+            try {
+                const response = await fetch('/api/premium/list');
+                const result = await response.json();
+
+                if (result.success) {
+                    allPremiums = result.data;
+                    renderPremiumUsers(allPremiums);
+                }
+            } catch (error) {
+                console.error('Premium yükleme hatası:', error);
+            }
+        }
+
+        function renderPremiumUsers(users) {
+            const premiumUsersList = document.getElementById('premiumUsers');
+
+            if (users.length === 0) {
+                premiumUsersList.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 2rem;">Henüz premium üyesi bulunmuyor.</p>';
+                return;
+            }
+
+            premiumUsersList.innerHTML = users.map(user => `
+                <div class="user-item">
+                    <img src="${user.avatar}" alt="${user.username}" class="user-avatar">
+                    <div class="user-info">
+                        <div class="user-header">
+                            <span class="user-id">${user.id}</span>
+                            <span class="premium-badge ${user.plan.toLowerCase()}">${user.plan}</span>
+                        </div>
+                        <div class="user-meta">
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                Başlangıç: ${new Date(user.startDate).toLocaleDateString('tr-TR')}
+                            </span>
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                Bitiş: ${new Date(user.endDate).toLocaleDateString('tr-TR')}
+                            </span>
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                </svg>
+                                ${user.status === 'active' ? 'Aktif' : 'Pasif'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn edit-btn" onclick='editPremium(${JSON.stringify(user)})'>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <button class="action-btn delete-btn" onclick="revokePremium('${user.id}', '${user.username}')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredUsers = allPremiums.filter(user =>
+                user.id.toLowerCase().includes(searchTerm) ||
+                user.username.toLowerCase().includes(searchTerm)
+            );
+            renderPremiumUsers(filteredUsers);
+        });
+
+        document.getElementById('planFilter').addEventListener('change', (e) => {
+            const plan = e.target.value;
+            const filteredUsers = plan
+                ? allPremiums.filter(user => user.plan.toLowerCase() === plan)
+                : allPremiums;
+            renderPremiumUsers(filteredUsers);
+        });
+
+        function openGenerateModal() {
+            document.getElementById('generateModal').style.display = 'block';
+            document.getElementById('generatedCode').style.display = 'none';
+        }
+
+        function closeGenerateModal() {
+            document.getElementById('generateModal').style.display = 'none';
+        }
+
+        async function generateCode() {
+            const type = document.getElementById('premiumType').value;
+            const duration = document.getElementById('duration').value;
+            const usageLimit = document.getElementById('usageLimit').value;
+            const note = document.getElementById('codeNote').value;
+
+            try {
+                const response = await fetch('/api/premium/code/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plan: type, duration, usageLimit, note })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('generatedCode').style.display = 'block';
+                    document.getElementById('codeValue').textContent = result.data.code;
+                } else {
+                    alert('Kod oluşturulamadı: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Kod oluşturma hatası:', error);
+                alert('Kod oluşturulurken bir hata oluştu');
+            }
+        }
+
+        function copyCode() {
+            const code = document.getElementById('codeValue').textContent;
+            navigator.clipboard.writeText(code);
+
+            const copyBtn = document.querySelector('.copy-btn');
+            copyBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            `;
+            setTimeout(() => {
+                copyBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                `;
+            }, 2000);
+        }
+
+        let currentEditUser = null;
+
+        function editPremium(user) {
+            currentEditUser = user;
+
+            document.getElementById('editUserInfo').innerHTML = `
+                <img src="${user.avatar}" alt="${user.username}">
+                <div>
+                    <h3 style="margin: 0; font-size: 1.125rem;">${user.username}</h3>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.875rem; color: #6b7280;">${user.id}</p>
+                </div>
+            `;
+
+            document.getElementById('editUserId').value = user.id;
+            document.getElementById('editPlan').value = user.plan;
+            document.getElementById('editStatus').value = user.status;
+
+            const endDate = new Date(user.endDate);
+            document.getElementById('editEndDate').value = endDate.toISOString().split('T')[0];
+
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            currentEditUser = null;
+        }
+
+        async function saveEditPremium() {
+            if (!currentEditUser) return;
+
+            const updatedData = {
+                userId: currentEditUser.id,
+                plan: document.getElementById('editPlan').value,
+                endDate: document.getElementById('editEndDate').value,
+                status: document.getElementById('editStatus').value
+            };
+
+            try {
+                const response = await fetch('/api/premium/update', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Premium başarıyla güncellendi!');
+                    closeEditModal();
+                    loadPremiums();
+                } else {
+                    alert('Güncelleme başarısız: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Güncelleme hatası:', error);
+                alert('Güncellenirken bir hata oluştu');
+            }
+        }
+
+        async function revokePremium(userId, username) {
+            if (!confirm(`${username} kullanıcısının premium üyeliğini iptal etmek istediğinizden emin misiniz?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/premium/remove', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Premium üyelik başarıyla kaldırıldı!');
+                    loadPremiums();
+                } else {
+                    alert('Kaldırma başarısız: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Kaldırma hatası:', error);
+                alert('Kaldırılırken bir hata oluştu');
+            }
+        }
+
+        window.onclick = function(event) {
+            const generateModal = document.getElementById('generateModal');
+            const editModal = document.getElementById('editModal');
+
+            if (event.target === generateModal) {
+                closeGenerateModal();
+            }
+            if (event.target === editModal) {
+                closeEditModal();
+            }
+        }
+
+        loadPremiums();
+    </script>
+</body>
+</html>
