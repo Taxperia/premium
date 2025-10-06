@@ -1,30 +1,6 @@
-const mongoose = require('mongoose');
 const { PermissionFlagsBits } = require('discord.js');
-
-const premiumSchema = new mongoose.Schema({
-    userId: String,
-    guildId: String,
-    plan: String,
-    startDate: Date,
-    endDate: Date,
-    status: String,
-    activatedBy: String
-}, { timestamps: true });
-
-const premiumCodeSchema = new mongoose.Schema({
-    code: String,
-    plan: String,
-    duration: Number,
-    usageLimit: Number,
-    usedCount: { type: Number, default: 0 },
-    usedBy: [{ userId: String, usedAt: Date }],
-    note: String,
-    createdBy: String,
-    isActive: { type: Boolean, default: true }
-}, { timestamps: true });
-
-const Premium = mongoose.models.Premium || mongoose.model('Premium', premiumSchema);
-const PremiumCode = mongoose.models.PremiumCode || mongoose.model('PremiumCode', premiumCodeSchema);
+const Premium = require('./models/Premium');
+const PremiumCode = require('./models/PremiumCode');
 
 function generateCode(prefix = 'PREM') {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
